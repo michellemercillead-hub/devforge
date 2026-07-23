@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevForge | Weekly Navigation</title>
+    <style>
+        :root {
+            --bg: #0b1020;
+            --panel: #131b33;
+            --text: #f4f7ff;
+            --accent: #7c9cff;
+            --accent-2: #b36dff;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: radial-gradient(circle at top, #1a2451, var(--bg));
+            color: var(--text);
+            display: grid;
+            place-items: center;
+            padding: 2rem;
+        }
+
+        .container {
+            width: min(900px, 100%);
+            background: rgba(19, 27, 51, 0.94);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: clamp(2rem, 4vw, 3rem);
+        }
+
+        p {
+            color: #c9d3f8;
+            line-height: 1.6;
+        }
+
+        .week-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        .week-card {
+            display: block;
+            padding: 1rem;
+            border-radius: 14px;
+            text-decoration: none;
+            color: var(--text);
+            background: linear-gradient(135deg, rgba(124, 156, 255, 0.2), rgba(179, 109, 255, 0.15));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.2s ease, border-color 0.2s ease;
+            list-style: none;
+        }
+
+        .week-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-2);
+        }
+
+        .week-card strong {
+            display: block;
+            margin-bottom: 0.35rem;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <h1>DevForge</h1>
+        <p>
+            Explore the weekly milestone pages for the DevForge design system and front-end work.
+        </p>
+
+        <div class="week-grid" aria-label="Weekly project links">
+            <a class="week-card" href="week02/index.html"><strong>Week 02</strong>Design System Tokens</a>
+            <a class="week-card" href="week03/index.html"><strong>Week 03</strong>UI Component Work</a>
+            <a class="week-card" href="week04/index.html"><strong>Week 04</strong>Layout Patterns</a>
+            <a class="week-card" href="week05/index.html"><strong>Week 05</strong>Interactive UI</a>
+            <a class="week-card" href="week06/index.html"><strong>Week 06</strong>Content & Features</a>
+            <a class="week-card" href="week07/index.html"><strong>Week 07</strong>Progressive Enhancements</a>
+            <a class="week-card" href="week08/index.html"><strong>Week 08</strong>Final Milestone</a>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,423 @@
+/* ===========================================
+   DEVFORGE DESIGN SYSTEM
+   Week 02 Capstone
+=========================================== */
+
+@layer reset, tokens, base, components;
+
+/* ===========================================
+   RESET
+=========================================== */
+
+@layer reset {
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body,
+h1,
+h2,
+h3,
+p,
+ul {
+    margin: 0;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+}
+
+}
+
+/* ===========================================
+   DESIGN TOKENS
+=========================================== */
+
+@layer tokens {
+
+:root {
+
+    /* ---------- Colors ---------- */
+
+    --color-primary: oklch(62% 0.18 250);
+    --color-secondary: oklch(72% 0.12 180);
+
+    --color-background: oklch(98% 0.01 250);
+    --color-surface: oklch(95% 0.01 250);
+
+    --color-text: oklch(18% 0.02 250);
+
+    /* ---------- Typography ---------- */
+
+    --size-base: 1rem;
+
+    --size-heading-md:
+        clamp(1.5rem, 1.2rem + 1vw, 2rem);
+
+    --size-heading-lg:
+        clamp(1.75rem, 1.31rem + 1.88vw, 3rem);
+
+    /* ---------- Spacing ---------- */
+
+    --space-xs: .25rem;
+    --space-sm: .5rem;
+    --space-md: 1rem;
+    --space-lg: 2rem;
+    --space-xl: 4rem;
+
+    /* ---------- Radius ---------- */
+
+    --radius: .75rem;
+
+    /* ---------- Shadow ---------- */
+
+    --shadow:
+        0 10px 25px rgba(0,0,0,.08);
+
+}
+
+/* ---------- Dark Mode ---------- */
+
+@media (prefers-color-scheme: dark) {
+
+:root {
+
+    --color-background: oklch(18% 0.02 250);
+
+    --color-surface: oklch(24% 0.02 250);
+
+    --color-text: oklch(96% 0.01 250);
+
+}
+
+}
+
+}
+
+/* ===========================================
+   BASE STYLES
+=========================================== */
+
+@layer base {
+
+body {
+
+    body {
+    font-family: "Inter", sans-serif;
+}
+
+h1,
+h2,
+h3 {
+    font-family: "Space Grotesk", sans-serif;
+}
+
+    background: var(--color-background);
+
+    color: var(--color-text);
+
+    font-size: var(--size-base);
+
+    line-height: 1.6;
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: var(--space-lg);
+
+}
+
+header {
+
+    text-align: center;
+
+    margin-bottom: var(--space-xl);
+
+}
+
+header p {
+
+    font-size: 1.1rem;
+
+}
+
+section {
+
+    background: var(--color-surface);
+
+    border-radius: var(--radius);
+
+    padding: var(--space-lg);
+
+    margin-bottom: var(--space-xl);
+
+    box-shadow: var(--shadow);
+
+}
+
+h1 {
+
+    font-size: var(--size-heading-lg);
+
+    margin-bottom: var(--space-md);
+
+}
+
+h2 {
+
+    font-size: var(--size-heading-md);
+
+    margin-bottom: var(--space-md);
+
+}
+
+h3 {
+
+    margin-bottom: var(--space-sm);
+
+}
+
+p {
+
+    margin-bottom: var(--space-md);
+
+    max-width: 70ch;
+
+}
+
+ul {
+
+    padding-left: 1.5rem;
+
+}
+
+li {
+
+    margin-bottom: .5rem;
+
+}
+
+}
+
+/* ===========================================
+   COMPONENTS
+=========================================== */
+
+@layer components {
+
+/* ---------- Color Palette ---------- */
+
+.color-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(180px,1fr));
+
+    gap: var(--space-lg);
+
+    margin-top: var(--space-lg);
+
+}
+
+.color-card {
+
+    border-radius: var(--radius);
+
+    padding: var(--space-lg);
+
+    text-align: center;
+
+    color: white;
+
+    min-height: 150px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+}
+
+.primary {
+
+    background: var(--color-primary);
+
+}
+
+.secondary {
+
+    background: var(--color-secondary);
+
+}
+
+.background {
+
+    background: var(--color-background);
+
+    color: var(--color-text);
+
+    border: 2px solid #ccc;
+
+}
+
+.surface {
+
+    background: var(--color-surface);
+
+    color: var(--color-text);
+
+    border: 2px solid #ccc;
+
+}
+
+.text {
+
+    background: var(--color-text);
+
+}
+
+/* ---------- Typography ---------- */
+
+.display-heading {
+
+    font-size: var(--size-heading-lg);
+
+}
+
+.medium-heading {
+
+    font-size: var(--size-heading-md);
+
+}
+
+/* ---------- Spacing ---------- */
+
+.spacing-grid {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: var(--space-md);
+
+    margin-top: var(--space-lg);
+
+}
+
+.spacing-box {
+
+    background: var(--color-primary);
+
+    color: white;
+
+    border-radius: var(--radius);
+
+    font-weight: bold;
+
+}
+
+.xs {
+
+    padding: var(--space-xs);
+
+}
+
+.sm {
+
+    padding: var(--space-sm);
+
+}
+
+.md {
+
+    padding: var(--space-md);
+
+}
+
+.lg {
+
+    padding: var(--space-lg);
+
+}
+
+.xl {
+
+    padding: var(--space-xl);
+
+}
+
+/* ---------- Button ---------- */
+
+.primary-btn {
+
+    background: var(--color-primary);
+
+    color: white;
+
+    border: none;
+
+    border-radius: var(--radius);
+
+    padding:
+
+        .85rem
+
+        1.5rem;
+
+    margin-bottom: var(--space-lg);
+
+    transition: .3s;
+
+}
+
+.primary-btn:hover {
+
+    opacity: .85;
+
+}
+
+/* ---------- Dashboard Card ---------- */
+
+.dashboard-card {
+
+    background: var(--color-background);
+
+    border-radius: var(--radius);
+
+    padding: var(--space-lg);
+
+    border-left:
+
+        6px solid
+
+        var(--color-primary);
+
+}
+
+footer {
+
+    text-align: center;
+
+    margin-top: var(--space-xl);
+
+    opacity: .7;
+
+}
+
+}

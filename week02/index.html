@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DevForge | Week 02 Design System</title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<header>
+
+    <h1><a href="../index.html">DevForge</a></h1>
+
+    <p class="home-link">
+        <a href="../index.html">← Back to Home</a>
+    </p>
+
+    <p>
+        Week 02 — Design System Tokens
+    </p>
+
+    <p>
+        Specialized Developer Workspace Dashboard
+    </p>
+
+</header>
+
+<main>
+
+    <!-- ===================== -->
+    <!-- COLOR PALETTE -->
+    <!-- ===================== -->
+
+    <section>
+
+        <h2>Color Palette</h2>
+
+        <p>
+
+            DevForge uses the modern OKLCH color space for improved
+            perceptual consistency. These color tokens will be reused
+            throughout every future milestone of the project.
+
+        </p>
+
+        <div class="color-grid">
+
+            <article class="color-card primary">
+
+                <h3>Primary</h3>
+
+                <p>Buttons<br>Links<br>Navigation</p>
+
+            </article>
+
+            <article class="color-card secondary">
+
+                <h3>Secondary</h3>
+
+                <p>Highlights<br>Status Indicators</p>
+
+            </article>
+
+            <article class="color-card background">
+
+                <h3>Background</h3>
+
+                <p>Main Application Background</p>
+
+            </article>
+
+            <article class="color-card surface">
+
+                <h3>Surface</h3>
+
+                <p>Cards & Panels</p>
+
+            </article>
+
+            <article class="color-card text">
+
+                <h3>Text</h3>
+
+                <p>Primary Typography</p>
+
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- ===================== -->
+    <!-- TYPOGRAPHY -->
+    <!-- ===================== -->
+
+    <section>
+
+        <h2>Typography Scale</h2>
+
+        <p>
+
+            DevForge uses responsive typography built with CSS
+            <strong>clamp()</strong> to ensure headings scale smoothly
+            across different screen sizes.
+
+        </p>
+
+        <h1 class="display-heading">
+
+            Build Better Software
+
+        </h1>
+
+        <h2 class="medium-heading">
+
+            Responsive Developer Workspace
+
+        </h2>
+
+        <p>
+
+            This paragraph demonstrates the project's base font size.
+            The typography system uses custom properties so every future
+            page shares the same visual hierarchy.
+
+        </p>
+
+    </section>
+
+    <!-- ===================== -->
+    <!-- SPACING -->
+    <!-- ===================== -->
+
+    <section>
+
+        <h2>Spacing Scale</h2>
+
+        <p>
+
+            DevForge uses relative spacing tokens based on rem units
+            to maintain consistent layouts.
+
+        </p>
+
+        <div class="spacing-grid">
+
+            <div class="spacing-box xs">XS</div>
+
+            <div class="spacing-box sm">SM</div>
+
+            <div class="spacing-box md">MD</div>
+
+            <div class="spacing-box lg">LG</div>
+            
+            <div class="spacing-box xl">XL</div>
+
+        </div>
+
+    </section>
+
+    <!-- ===================== -->
+    <!-- COMPONENTS -->
+    <!-- ===================== -->
+
+    <section>
+
+        <h2>Sample Components</h2>
+
+        <p>
+
+            These sample components demonstrate how the design
+            tokens will be reused in future dashboard layouts.
+
+        </p>
+
+        <button class="primary-btn">
+
+            Launch Workspace
+
+        </button>
+
+        <article class="dashboard-card">
+
+            <h3>Developer Dashboard Card</h3>
+
+            <p>
+
+                Dashboard cards will eventually display project
+                summaries, coding statistics, GitHub activity,
+                task tracking, and productivity tools.
+
+            </p>
+
+        </article>
+
+    </section>
+
+    <!-- ===================== -->
+    <!-- DESIGN NOTES -->
+    <!-- ===================== -->
+
+    <section>
+
+        <h2>Design System Notes</h2>
+
+        <ul>
+
+            <li>OKLCH custom properties for color tokens</li>
+
+            <li>Automatic Light and Dark Mode</li>
+
+            <li>Fluid typography using clamp()</li>
+
+            <li>Spacing variables using rem units</li>
+
+            <li>Reusable CSS custom properties</li>
+
+            <li>CSS Cascade Layers</li>
+
+            <li>Responsive design foundation</li>
+
+        </ul>
+
+    </section>
+
+    <!-- ===================== -->
+    <!-- CLAMP EXPLANATION -->
+    <!-- ===================== -->
+
+    <section>
+
+        <h2>Fluid Typography Explanation</h2>
+
+        <p>
+
+            The main heading uses:
+
+        </p>
+
+        <code>
+
+            clamp(1.75rem, 1.31rem + 1.88vw, 3rem)
+
+        </code>
+
+        <p>
+
+            The minimum font size is 1.75rem for small screens.
+
+            The maximum font size is 3rem for desktop displays.
+
+            The middle value combines rem and viewport width so the
+            typography scales smoothly while remaining accessible
+            when users zoom their browser to 200%.
+
+        </p>
+
+    </section>
+
+</main>
+
+<footer>
+
+    <p>
+
+        © 2026 DevForge Developer Workspace
+
+    </p>
+
+</footer>
+
+</body>
+
+</html>
