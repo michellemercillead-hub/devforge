@@ -143,9 +143,41 @@ h3 {
 
 header {
 
+    position: relative;
+
     text-align: center;
 
     margin-bottom: var(--space-xl);
+
+}
+
+.week-badge {
+
+    position: absolute;
+
+    top: var(--space-sm);
+
+    right: var(--space-sm);
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: .35rem .75rem;
+
+    border-radius: 999px;
+
+    background: color-mix(in srgb, var(--color-primary) 30%, var(--color-surface));
+
+    color: white;
+
+    font-size: .8rem;
+
+    letter-spacing: .08em;
+
+    text-transform: uppercase;
 
 }
 

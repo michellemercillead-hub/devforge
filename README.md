@@ -1,8 +1,4 @@
-# DevDesk
-
-## Overview
-
-DevDesk is # DevForge
+# DevForge
 
 ## Overview
 
