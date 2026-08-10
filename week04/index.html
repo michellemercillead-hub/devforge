@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DevForge | Week 04 Feature Grid</title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<header>
+
+    <h1><a href="../index.html">DevForge</a></h1>
+
+    <span class="week-badge">week 04</span>
+
+</header>
+
+<main>
+
+    <!-- ===================== -->
+    <!-- DASHBOARD LAYOUT -->
+    <!-- ===================== -->
+
+    <section id="dashboard-section">
+
+        <h2>Developer Workspace Dashboard</h2>
+
+        <p>
+
+            This semantic wrapper combines a flexbox shell with CSS Grid
+            panels to establish the structural zones of a capstone-ready workspace.
+
+        </p>
+
+        <section class="dashboard-shell" role="application" aria-label="Developer workspace dashboard">
+
+            <header class="dashboard-shell-header">
+
+                <a class="dashboard-shell-home" href="../index.html">← Home</a>
+
+                <h2>DevForge Workspace</h2>
+
+            </header>
+
+            <aside class="dashboard-sidebar" aria-label="Primary navigation">
+
+                <div class="sidebar-brand">
+
+                    <p class="eyebrow">Workspace</p>
+
+                    <h3>DevForge</h3>
+
+                </div>
+
+                <nav class="dashboard-nav" aria-label="Dashboard navigation">
+
+                    <a class="nav-link active" href="#">Overview</a>
+
+                    <a class="nav-link" href="#">Projects</a>
+
+                    <a class="nav-link" href="#">Deployments</a>
+
+                    <a class="nav-link" href="#">Settings</a>
+
+                </nav>
+
+            </aside>
+
+            <section class="dashboard-main-area">
+
+                <header class="dashboard-topbar">
+
+                    <div>
+
+                        <p class="eyebrow">Today</p>
+
+                        <h3>Build sprint dashboard</h3>
+
+                    </div>
+
+                    <button class="primary-btn">New Task</button>
+
+                </header>
+
+                <section class="dashboard-workspace" aria-label="Workspace panels">
+
+                    <article class="workspace-card workspace-card--highlight">
+
+                        <h3>Current Focus</h3>
+
+                        <p>Ship the dashboard prototype and refine the QA checklist.</p>
+
+                    </article>
+
+                    <article class="workspace-card">
+
+                        <h3>Velocity</h3>
+
+                        <p>12 tickets completed · 4 in review</p>
+
+                    </article>
+
+                    <article class="workspace-card">
+
+                        <h3>Activity Feed</h3>
+
+                        <p>GitHub sync, design approvals, and CI status are all flowing.</p>
+
+                    </article>
+
+                    <article class="workspace-card workspace-card--wide">
+
+                        <h3>Delivery Timeline</h3>
+
+                        <p>Weekly milestones, branch health, and release readiness.</p>
+
+                    </article>
+
+                </section>
+
+            </section>
+
+            <aside class="dashboard-drawer" aria-label="Context drawer">
+
+                <h3>Context</h3>
+
+                <p>Branch health, release notes, and teammate updates.</p>
+
+            </aside>
+
+        </section>
+
+    </section>
+
+    <section class="content-grid" aria-label="Feature stories and updates">
+
+        <article class="content-card feature-card">
+
+            <p class="eyebrow">Featured Story</p>
+
+            <h3>Ship the next release with a calmer, smarter build pipeline.</h3>
+
+            <p>We reduced review bottlenecks, clarified branch ownership, and aligned design feedback with sprint health across the stack.</p>
+
+            <a href="#">Read strategy</a>
+
+        </article>
+
+        <article class="content-card">
+
+            <p class="eyebrow">Sprint</p>
+
+            <h3>42 tasks</h3>
+
+            <p>12 shipped this week, 6 assigned to engineering, and 3 waiting on QA.</p>
+
+        </article>
+
+        <article class="content-card">
+
+            <p class="eyebrow">Deployments</p>
+
+            <h3>3 live</h3>
+
+            <p>Production health remains stable while the design QA review stays ahead of the next milestone.</p>
+
+        </article>
+
+        <article class="content-card">
+
+            <p class="eyebrow">Team sync</p>
+
+            <h3>Wednesday standup</h3>
+
+            <p>Focus follows the onboarding handoff, campaign rollout, and accessibility fixes.</p>
+
+        </article>
+
+        <article class="content-card">
+
+            <p class="eyebrow">Release notes</p>
+
+            <h3>v2.4.1</h3>
+
+            <p>Performance tuning, design token cleanup, and new workspace analytics are now flowing into the release branch.</p>
+
+        </article>
+
+    </section>
+
+</main>
+
+<footer>
+
+    <p>
+
+        © 2026 DevForge Developer Workspace
+
+    </p>
+
+</footer>
+
+</body>
+
+</html>

@@ -2,10 +2,12 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>DevForge | Week 02 Design System</title>
+    <title>DevForge | Week 04 Feature Grid</title>
 
     <!-- Google Fonts -->
 
@@ -15,270 +17,451 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 
-    <!-- Stylesheet -->
-
     <link rel="stylesheet" href="styles.css">
 
 </head>
 
 <body>
 
-    <!-- =====================================
-         HEADER
-    ====================================== -->
+<main>
 
-    <header>
+    <section class="student-dashboard" aria-label="Student dashboard overview">
 
-        <h1>DevForge</h1>
+        <div class="dashboard-header-row">
 
-        <p>
-            Week 02 • Design System Tokens
-        </p>
+            <h1>Dashboard for student</h1>
 
-        <p>
-            Specialized Developer Workspace Dashboard
-        </p>
+            <button type="button" class="dark-mode-toggle">Dark mode</button>
 
-    </header>
+        </div>
 
-    <main>
+        <section class="dashboard-shell" role="application" aria-label="Student workspace dashboard">
 
-        <!-- =====================================
-             COLOR PALETTE
-        ====================================== -->
+            <aside class="dashboard-sidebar" aria-label="Primary navigation">
 
-        <section>
+                <div class="sidebar-brand">
 
-            <h2>🎨 Color Palette</h2>
+                    <span class="brand-mark">✦</span>
 
-            <p>
+                    <span>Smart</span>
 
-                DevForge uses the modern <strong>OKLCH</strong> color space to
-                create accessible colors with consistent perceived brightness.
-                These design tokens will be reused throughout every future
-                milestone.
+                </div>
 
-            </p>
+                <nav class="dashboard-nav" aria-label="Dashboard navigation">
 
-            <div class="color-grid">
+                    <a class="nav-link active" href="#">Dashboard</a>
 
-                <article class="color-card primary">
+                    <a class="nav-link" href="#">Lessons</a>
 
-                    <h3>Primary</h3>
+                    <a class="nav-link" href="#">Schedule</a>
 
-                    <p>
-                        Buttons<br>
-                        Links<br>
-                        Navigation
-                    </p>
+                    <a class="nav-link" href="#">Materials</a>
 
-                </article>
+                    <a class="nav-link" href="#">Forum</a>
 
-                <article class="color-card secondary">
+                    <a class="nav-link" href="#">Assessments</a>
 
-                    <h3>Secondary</h3>
+                    <a class="nav-link" href="#">Settings</a>
 
-                    <p>
-                        Highlights<br>
-                        Notifications
-                    </p>
+                </nav>
 
-                </article>
+                <button type="button" class="logout-btn">Log Out</button>
 
-                <article class="color-card background">
+            </aside>
 
-                    <h3>Background</h3>
+            <section class="dashboard-main-area">
 
-                    <p>
-                        Main Page
-                    </p>
+                <header class="dashboard-topbar" aria-label="Workspace controls">
 
-                </article>
+                    <div class="search-wrap">
 
-                <article class="color-card surface">
+                        <span class="search-icon">⌕</span>
 
-                    <h3>Surface</h3>
+                        <input type="text" value="Search" aria-label="Search" />
 
-                    <p>
-                        Cards<br>
-                        Panels
-                    </p>
+                    </div>
 
-                </article>
+                    <div class="topbar-actions">
 
-                <article class="color-card text">
+                        <span class="language-pill">ENG</span>
 
-                    <h3>Text</h3>
+                        <span class="icon-bell">◔</span>
 
-                    <p>
-                        Primary Typography
-                    </p>
+                        <div class="user-pill">
 
-                </article>
+                            <span class="user-avatar">G</span>
 
-            </div>
+                            <span>Grace Stanley</span>
+
+                        </div>
+
+                    </div>
+
+                </header>
+
+                <div class="dashboard-grid" aria-label="Student content cards">
+
+                    <article class="content-card feature-card">
+
+                        <div class="feature-copy">
+
+                            <p class="eyebrow">Hello Grace!</p>
+
+                            <h3>You have 3 new tasks &amp; it is a lot of work for today! So let's start review it!</h3>
+
+                        </div>
+
+                        <div class="device-illustration" aria-hidden="true">
+
+                            <div class="monitor">
+
+                                <div class="screen"></div>
+
+                            </div>
+
+                            <div class="desk"></div>
+
+                            <div class="person">
+
+                                <div class="head"></div>
+
+                                <div class="body"></div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <article class="content-card calendar-card">
+
+                        <div class="mini-header">
+
+                            <h3>Calendar</h3>
+
+                            <button type="button" class="ghost-btn">Today</button>
+
+                        </div>
+
+                        <div class="calendar-list">
+
+                            <div class="event-item active">
+
+                                <span class="time">10:00</span>
+
+                                <div class="event-meta">
+
+                                    <h4>Electronics lesson</h4>
+
+                                    <p>G 9:45-10:30, 21 lesson</p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="event-item">
+
+                                <span class="time">11:00</span>
+
+                                <div class="event-meta">
+
+                                    <h4>Electronics lesson</h4>
+
+                                    <p>G 11:00-11:45, 23 lesson</p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="event-item">
+
+                                <span class="time">12:00</span>
+
+                                <div class="event-meta">
+
+                                    <h4>Robotics lesson</h4>
+
+                                    <p>G 12:00-12:45, 25 lesson</p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="event-item">
+
+                                <span class="time">13:00</span>
+
+                                <div class="event-meta">
+
+                                    <h4>C++ lesson</h4>
+
+                                    <p>G 13:45-14:30, 21 lesson</p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <article class="content-card performance-card">
+
+                        <div class="mini-header small-row">
+
+                            <h3>Performance</h3>
+
+                            <button type="button" class="ghost-btn">December</button>
+
+                            <button type="button" class="ghost-btn ghost-btn--alt">My visit</button>
+
+                        </div>
+
+                        <div class="lesson-stats">
+
+                            <div class="lesson-heading">
+
+                                <span>The best lessons:</span>
+
+                                <strong>95.4</strong>
+
+                                <button type="button" class="pill-btn">All lessons</button>
+
+                            </div>
+
+                            <div class="bar-chart" aria-label="Chart of lesson scores">
+
+                                <span style="--h: 65%"></span>
+
+                                <span style="--h: 78%"></span>
+
+                                <span style="--h: 50%"></span>
+
+                                <span style="--h: 72%"></span>
+
+                                <span style="--h: 62%"></span>
+
+                                <span style="--h: 58%"></span>
+
+                                <span style="--h: 80%"></span>
+
+                                <span style="--h: 70%"></span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <article class="content-card metrics-card">
+
+                        <div class="ring-row">
+
+                            <div class="metric-ring ring-blue">
+
+                                <span>92%</span>
+
+                            </div>
+
+                            <div class="metric-ring ring-cyan">
+
+                                <span>83%</span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="ring-row">
+
+                            <div class="metric-ring ring-purple">
+
+                                <span>78%</span>
+
+                            </div>
+
+                            <div class="metric-ring ring-teal">
+
+                                <span>97%</span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <article class="content-card teachers-card">
+
+                        <div class="mini-header">
+
+                            <h3>Linked Teachers</h3>
+
+                            <a href="#">See all</a>
+
+                        </div>
+
+                        <div class="teacher-item">
+
+                            <div class="teacher-avatar avatar-one"></div>
+
+                            <div class="teacher-copy">
+
+                                <strong>Mary Johnson (mentor)</strong>
+
+                                <small>Science</small>
+
+                            </div>
+
+                            <div class="teacher-actions">
+
+                                <span>✉</span>
+
+                                <span>☎</span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="teacher-item">
+
+                            <div class="teacher-avatar avatar-two"></div>
+
+                            <div class="teacher-copy">
+
+                                <strong>James Brown</strong>
+
+                                <small>Foreign language (Japanese)</small>
+
+                            </div>
+
+                            <div class="teacher-actions">
+
+                                <span>✉</span>
+
+                                <span>☎</span>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                    <article class="content-card events-card">
+
+                        <div class="mini-header">
+
+                            <h3>Upcoming events</h3>
+
+                            <a href="#">See all</a>
+
+                        </div>
+
+                        <div class="event-item event-item--stacked">
+
+                            <div class="event-avatar avatar-three"></div>
+
+                            <div class="event-copy">
+
+                                <h4>The main event in your life "Robot Fest" will coming soon in...</h4>
+
+                                <p>14 December 2023 · 12:00 pm</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="event-item event-item--stacked">
+
+                            <div class="event-avatar avatar-four"></div>
+
+                            <div class="event-copy">
+
+                                <h4>Webinar of new tools in Minecraft</h4>
+
+                                <p>21 December 2023 · 11:00 pm</p>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+            <aside class="dashboard-drawer" aria-label="Context drawer">
+
+                <div class="mini-header">
+
+                    <h3>Calendar</h3>
+
+                    <button type="button" class="ghost-btn">Today</button>
+
+                </div>
+
+                <div class="calendar-list">
+
+                    <div class="event-item active">
+
+                        <span class="time">10:00</span>
+
+                        <div class="event-meta">
+
+                            <h4>Electronics lesson</h4>
+
+                            <p>G 9:45-10:30, 21 lesson</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="event-item">
+
+                        <span class="time">11:00</span>
+
+                        <div class="event-meta">
+
+                            <h4>Electronics lesson</h4>
+
+                            <p>G 11:00-11:45, 23 lesson</p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="event-item">
+
+                        <span class="time">12:00</span>
+
+                        <div class="event-meta">
+
+                            <h4>Robotics lesson</h4>
+
+                            <p>G 12:00-12:45, 25 lesson</p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </aside>
 
         </section>
 
-        <!-- =====================================
-             TYPOGRAPHY
-        ====================================== -->
+    </section>
 
-        <section>
+</main>
 
-            <h2>🔤 Fluid Typography</h2>
+<footer>
 
-            <p>
+    <p>
 
-                DevForge uses responsive typography powered by
-                <strong>clamp()</strong> to create a smooth reading experience
-                across mobile, tablet, and desktop devices.
+        © 2026 DevForge Developer Workspace
 
-            </p>
+    </p>
 
-            <h1 class="display-heading">
-
-                Build Better Software
-
-            </h1>
-
-            <h2 class="medium-heading">
-
-                Responsive Heading Example
-
-            </h2>
-
-            <p>
-
-                This paragraph uses the base font size defined within the
-                project's design tokens. The headings automatically scale
-                between smaller and larger screens while remaining accessible
-                when users zoom to 200%.
-
-            </p>
-
-        </section>
-
-        <!-- =====================================
-             SPACING
-        ====================================== -->
-
-        <section>
-
-            <h2>📏 Spacing System</h2>
-
-            <p>
-
-                DevForge uses a consistent spacing scale based entirely on
-                <strong>rem</strong> units.
-
-            </p>
-
-            <div class="spacing-grid">
-
-                <div class="spacing-box xs">XS</div>
-
-                <div class="spacing-box sm">SM</div>
-
-                <div class="spacing-box md">MD</div>
-
-                <div class="spacing-box lg">LG</div>
-
-                <div class="spacing-box xl">XL</div>
-
-            </div>
-
-        </section>
-
-        <!-- =====================================
-             COMPONENTS
-        ====================================== -->
-
-        <section>
-
-            <h2>🧩 Sample Components</h2>
-
-            <p>
-
-                These reusable UI components demonstrate how the design tokens
-                will be applied throughout future dashboard layouts.
-
-            </p>
-
-            <button class="primary-btn">
-
-                Launch Workspace
-
-            </button>
-
-            <div class="dashboard-card">
-
-                <h3>Developer Dashboard Card</h3>
-
-                <p>
-
-                    Dashboard cards will display project summaries,
-                    development statistics, repository activity,
-                    upcoming tasks, and productivity widgets.
-
-                </p>
-
-            </div>
-
-        </section>
-
-        <!-- =====================================
-             DESIGN SYSTEM NOTES
-        ====================================== -->
-
-        <section>
-
-            <h2>📘 Design System Notes</h2>
-
-            <p>
-
-                The DevForge design system is built around reusable CSS custom
-                properties (design tokens). These tokens provide consistent
-                colors, typography, spacing, and component styling throughout
-                the application.
-
-            </p>
-
-            <ul>
-
-                <li>✅ OKLCH color variables</li>
-
-                <li>✅ WCAG AA accessible contrast</li>
-
-                <li>✅ Automatic Light & Dark Mode</li>
-
-                <li>✅ Fluid typography using clamp()</li>
-
-                <li>✅ Spacing tokens using rem units</li>
-
-                <li>✅ CSS Cascade Layers</li>
-
-                <li>✅ Responsive design foundation</li>
-
-            </ul>
-
-        </section>
-
-    </main>
-
-    <!-- =====================================
-         FOOTER
-    ====================================== -->
-
-    <footer>
-
-        <p>
-
-            © 2026 DevForge | Specialized Developer Workspace Dashboard
-
-        </p>
-
-    </footer>
+</footer>
 
 </body>
 
