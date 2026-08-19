@@ -1,0 +1,49 @@
+name: Update GitHub Pages data
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Update GitHub Pages data
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "GitHub Pages data update workflow is running."
+          mkdir -p data
+          http_code=$(curl --silent --show-error --location \
+            --output /tmp/github-pages.json \
+            --write-out "%{http_code}" \
+            --header "Accept: application/vnd.github+json" \
+            --header "Authorization: Bearer ${GH_TOKEN}" \
+            --header "X-GitHub-Api-Version: 2026-03-10" \
+            "https://api.github.com/repos/${REPOSITORY}/pages")
+
+          if [ "${http_code}" = "200" ]; then
+            jq --arg repository "${REPOSITORY}" \
+              '{repository: $repository, status: (.status // "unknown"), url: (.html_url // null), cname: (.cname // null), build_type: (.build_type // null), updated_at: (now | strftime("%Y-%m-%dT%H:%M:%SZ"))}' \
+              /tmp/github-pages.json > data/github-pages.json
+          else
+            jq -n --arg repository "${REPOSITORY}" --arg code "${http_code}" \
+              '{repository: $repository, status: "unavailable", url: null, cname: null, build_type: null, error: ("GitHub Pages API returned HTTP " + $code)}' \
+              > data/github-pages.json
+          fi
+
+      - name: Commit updated Pages data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/github-pages.json
+          git diff --cached --quiet || git commit -m "Update GitHub Pages data"
+          git push

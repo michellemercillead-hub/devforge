@@ -345,6 +345,30 @@
 
                     </article>
 
+                    <article class="content-card pomodoro-card">
+
+                        <div class="mini-header">
+
+                            <h3>Pomodoro Timer</h3>
+
+                            <span class="pomodoro-mode" data-pomodoro-mode>Focus</span>
+
+                        </div>
+
+                        <div class="pomodoro-display" data-pomodoro-display>25:00</div>
+
+                        <div class="pomodoro-controls">
+
+                            <button type="button" class="ghost-btn" data-pomodoro-start>Start</button>
+
+                            <button type="button" class="ghost-btn" data-pomodoro-pause>Pause</button>
+
+                            <button type="button" class="ghost-btn ghost-btn--alt" data-pomodoro-reset>Reset</button>
+
+                        </div>
+
+                    </article>
+
                     <article class="content-card events-card">
 
                         <div class="mini-header">
@@ -462,6 +486,68 @@
     </p>
 
 </footer>
+
+<script>
+    (() => {
+        const FOCUS_MINUTES = 25;
+        const BREAK_MINUTES = 5;
+
+        const display = document.querySelector('[data-pomodoro-display]');
+        const modeLabel = document.querySelector('[data-pomodoro-mode]');
+        const startBtn = document.querySelector('[data-pomodoro-start]');
+        const pauseBtn = document.querySelector('[data-pomodoro-pause]');
+        const resetBtn = document.querySelector('[data-pomodoro-reset]');
+
+        let secondsLeft = FOCUS_MINUTES * 60;
+        let isFocus = true;
+        let intervalId = null;
+
+        function render() {
+            const mins = Math.floor(secondsLeft / 60).toString().padStart(2, '0');
+            const secs = (secondsLeft % 60).toString().padStart(2, '0');
+            display.textContent = `${mins}:${secs}`;
+            modeLabel.textContent = isFocus ? 'Focus' : 'Break';
+        }
+
+        function tick() {
+            if (secondsLeft <= 0) {
+                isFocus = !isFocus;
+                secondsLeft = (isFocus ? FOCUS_MINUTES : BREAK_MINUTES) * 60;
+            } else {
+                secondsLeft -= 1;
+            }
+            render();
+        }
+
+        startBtn.addEventListener('click', () => {
+            if (intervalId) return;
+            intervalId = setInterval(tick, 1000);
+        });
+
+        pauseBtn.addEventListener('click', () => {
+            clearInterval(intervalId);
+            intervalId = null;
+        });
+
+        resetBtn.addEventListener('click', () => {
+            clearInterval(intervalId);
+            intervalId = null;
+            isFocus = true;
+            secondsLeft = FOCUS_MINUTES * 60;
+            render();
+        });
+
+        render();
+
+        // Highlight the calendar's "Today" buttons with the current date.
+        const todayLabel = new Date().toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+        document.querySelectorAll('.ghost-btn').forEach((btn) => {
+            if (btn.textContent.trim() === 'Today') {
+                btn.textContent = todayLabel;
+            }
+        });
+    })();
+</script>
 
 </body>
 

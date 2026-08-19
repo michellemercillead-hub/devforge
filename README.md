@@ -55,6 +55,19 @@ These design tokens will become the foundation for all future dashboard componen
 - API Integration
 - Dynamic Dashboard Data
 
+## GitHub Pages API Integration
+
+The Week 04 dashboard reads deployment status from `data/github-pages.json`.
+The `.github/workflows/update-pages.yml` workflow securely calls
+the GitHub Pages API with GitHub's built-in Actions token, so no personal token
+is exposed in the browser.
+
+To enable the integration after pushing this project to GitHub:
+
+1. Enable GitHub Pages for the repository in **Settings > Pages**.
+2. In **Settings > Actions > General**, allow the workflow to read and write repository contents.
+3. Run **Update GitHub Pages data** from the repository's Actions tab, or push to `main` or `master`.
+
 ### Week 07
 - Accessibility Improvements
 - Animations

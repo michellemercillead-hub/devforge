@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>DevForge | Week 04 Feature Grid</title>
+    <title>DevForge | Week 04 Responsive Content Grid</title>
 
     <!-- Google Fonts -->
 
@@ -39,12 +39,12 @@
 
     <section id="dashboard-section">
 
-        <h2>Developer Workspace Dashboard</h2>
+        <h2>Asymmetric Content Hub</h2>
 
         <p>
 
-            This semantic wrapper combines a flexbox shell with CSS Grid
-            panels to establish the structural zones of a capstone-ready workspace.
+            A responsive editorial grid gives the release story priority while
+            keeping sprint, deployment, team, and release updates in view.
 
         </p>
 
@@ -72,7 +72,7 @@
 
                     <a class="nav-link active" href="#">Overview</a>
 
-                    <a class="nav-link" href="#">Projects</a>
+                    <a class="nav-link" href="../projects/index.html">Projects</a>
 
                     <a class="nav-link" href="#">Deployments</a>
 
@@ -112,7 +112,7 @@
 
                         <h3>Velocity</h3>
 
-                        <p>12 tickets completed · 4 in review</p>
+                        <p data-repository-count>Loading public repositories...</p>
 
                     </article>
 
@@ -120,7 +120,7 @@
 
                         <h3>Activity Feed</h3>
 
-                        <p>GitHub sync, design approvals, and CI status are all flowing.</p>
+                        <p data-repository-activity>Checking GitHub activity...</p>
 
                     </article>
 
@@ -140,7 +140,9 @@
 
                 <h3>Context</h3>
 
-                <p>Branch health, release notes, and teammate updates.</p>
+                <p data-pages-status>Loading GitHub Pages status...</p>
+
+                <a data-pages-url href="#" target="_blank" rel="noopener" hidden>Open deployed site</a>
 
             </aside>
 
@@ -162,7 +164,7 @@
 
         </article>
 
-        <article class="content-card">
+        <article class="content-card content-card--sprint">
 
             <p class="eyebrow">Sprint</p>
 
@@ -172,7 +174,7 @@
 
         </article>
 
-        <article class="content-card">
+        <article class="content-card content-card--deployments">
 
             <p class="eyebrow">Deployments</p>
 
@@ -182,7 +184,7 @@
 
         </article>
 
-        <article class="content-card">
+        <article class="content-card content-card--team">
 
             <p class="eyebrow">Team sync</p>
 
@@ -192,7 +194,7 @@
 
         </article>
 
-        <article class="content-card">
+        <article class="content-card content-card--release">
 
             <p class="eyebrow">Release notes</p>
 
@@ -205,6 +207,52 @@
     </section>
 
 </main>
+
+<script>
+    (async () => {
+        const repositoryCount = document.querySelector('[data-repository-count]');
+        const repositoryActivity = document.querySelector('[data-repository-activity]');
+        const pagesStatus = document.querySelector('[data-pages-status]');
+        const pagesUrl = document.querySelector('[data-pages-url]');
+
+        try {
+            const response = await fetch('https://api.github.com/users/michellemercillead-hub/repos?sort=updated&per_page=100');
+            if (!response.ok) throw new Error('GitHub request failed');
+
+            const repositories = await response.json();
+            if (!Array.isArray(repositories)) throw new Error('Unexpected GitHub response');
+
+            repositoryCount.textContent = `${repositories.length} public ${repositories.length === 1 ? 'repository' : 'repositories'} tracked`;
+
+            if (repositories.length === 0) {
+                repositoryActivity.textContent = 'No public repository activity found.';
+                return;
+            }
+
+            repositoryActivity.textContent = `Latest update: ${repositories[0].name}`;
+        } catch (error) {
+            repositoryCount.textContent = 'Repository data unavailable';
+            repositoryActivity.textContent = 'GitHub activity could not be loaded right now.';
+        }
+
+        try {
+            const response = await fetch('../data/github-pages.json');
+            if (!response.ok) throw new Error('Pages data request failed');
+
+            const pages = await response.json();
+            pagesStatus.textContent = pages.status === 'built'
+                ? 'GitHub Pages is live.'
+                : `GitHub Pages status: ${pages.status}.`;
+
+            if (pages.url) {
+                pagesUrl.href = pages.url;
+                pagesUrl.hidden = false;
+            }
+        } catch (error) {
+            pagesStatus.textContent = 'GitHub Pages status is unavailable.';
+        }
+    })();
+</script>
 
 <footer>
 
