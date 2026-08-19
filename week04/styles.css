@@ -520,9 +520,13 @@ li {
 
 .primary-btn {
 
+    display: inline-block;
+
     background: var(--color-primary);
 
     color: white;
+
+    text-decoration: none;
 
     border: none;
 
@@ -1230,6 +1234,93 @@ footer p:first-child {
     margin-bottom: var(--space-lg);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     padding-bottom: var(--space-sm);
+
+}
+
+/* ---------- Narrow viewport and browser zoom support ---------- */
+
+@media (max-width: 1100px) {
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: clip;
+    }
+
+    .dashboard-shell {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-areas:
+            "header"
+            "sidebar"
+            "main"
+            "drawer";
+        min-height: auto;
+    }
+
+    .dashboard-sidebar,
+    .dashboard-main-area,
+    .dashboard-drawer,
+    .content-grid {
+        min-width: 0;
+    }
+
+    .dashboard-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .nav-link {
+        overflow-wrap: anywhere;
+    }
+
+    .dashboard-workspace,
+    .content-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .content-grid {
+        grid-template-areas: none;
+    }
+
+    .dashboard-workspace {
+        grid-template-areas:
+            "focus"
+            "velocity"
+            "activity"
+            "timeline";
+    }
+
+    .workspace-card--wide,
+    .feature-card,
+    .content-card--sprint,
+    .content-card--deployments,
+    .content-card--team,
+    .content-card--release {
+        grid-column: auto;
+        grid-row: auto;
+        grid-area: auto;
+    }
+
+    .feature-card {
+        min-height: 220px;
+    }
+
+    .dashboard-topbar,
+    .dashboard-shell-header {
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+    }
+
+    h1,
+    h2,
+    h3,
+    p,
+    a,
+    button {
+        overflow-wrap: anywhere;
+    }
+
 }
 
 .close-btn {

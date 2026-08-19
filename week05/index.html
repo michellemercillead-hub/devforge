@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DevForge | Week 04 Responsive Content Grid</title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<header>
+
+    <h1><a href="../index.html">DevForge</a></h1>
+
+    <span class="week-badge">week 05</span>
+
+</header>
+
+<main>
+
+    <!-- ===================== -->
+    <!-- DASHBOARD LAYOUT -->
+    <!-- ===================== -->
+
+    <section id="dashboard-section">
+
+        <h2>Asymmetric Content Hub</h2>
+
+        <p>
+
+            A responsive editorial grid gives the release story priority while
+            keeping sprint, deployment, team, and release updates in view.
+
+        </p>
+
+        <section class="dashboard-shell" role="application" aria-label="Developer workspace dashboard">
+
+            <header class="dashboard-shell-header">
+
+                <a class="dashboard-shell-home" href="../index.html">← Home</a>
+
+                <h2>DevForge Workspace</h2>
+
+            </header>
+
+            <aside class="dashboard-sidebar" aria-label="Primary navigation">
+
+                <div class="sidebar-brand">
+
+                    <p class="eyebrow">Workspace</p>
+
+                    <h3>DevForge</h3>
+
+                </div>
+
+                <nav class="dashboard-nav" aria-label="Dashboard navigation">
+
+                    <a class="nav-link active" href="#">Overview</a>
+
+                    <a class="nav-link" href="../projects/index.html">Projects</a>
+
+                    <a class="nav-link" href="https://github.com/users/michellemercillead-hub/projects/5/views/1" target="_blank" rel="noopener">Kanban Board</a>
+
+                    <a class="nav-link" data-pages-nav href="#deployment-status">Deployments</a>
+
+                    <a class="nav-link" href="#">Settings</a>
+
+                </nav>
+
+            </aside>
+
+            <section class="dashboard-main-area">
+
+                <header class="dashboard-topbar">
+
+                    <div>
+
+                        <p class="eyebrow">Today</p>
+
+                        <h3>Build sprint dashboard</h3>
+
+                    </div>
+
+                    <a class="primary-btn" href="https://github.com/michellemercillead-hub/devforge/issues/new" target="_blank" rel="noopener">New Issue</a>
+
+                </header>
+
+                <section class="dashboard-workspace" aria-label="Workspace panels">
+
+                    <article class="workspace-card workspace-card--highlight">
+
+                        <h3>Current Focus</h3>
+
+                        <p>Ship the dashboard prototype and refine the QA checklist.</p>
+
+                    </article>
+
+                    <article class="workspace-card">
+
+                        <h3>Velocity</h3>
+
+                        <p data-repository-count>Loading public repositories...</p>
+
+                    </article>
+
+                    <article class="workspace-card">
+
+                        <h3>Activity Feed</h3>
+
+                        <p data-repository-activity>Checking GitHub activity...</p>
+
+                    </article>
+
+                    <article class="workspace-card workspace-card--wide">
+
+                        <h3>Delivery Timeline</h3>
+
+                        <p>Weekly milestones, branch health, and release readiness.</p>
+
+                    </article>
+
+                </section>
+
+            </section>
+
+            <aside class="dashboard-drawer" id="deployment-status" aria-label="Deployment status">
+
+                <h3>Deployments</h3>
+
+                <p data-pages-status>Loading GitHub Pages status...</p>
+
+                <a data-pages-url href="#" target="_blank" rel="noopener" hidden>Open deployed site</a>
+
+            </aside>
+
+        </section>
+
+    </section>
+
+    <section class="content-grid" aria-label="Feature stories and updates">
+
+        <article class="content-card feature-card">
+
+            <p class="eyebrow">Featured Story</p>
+
+            <h3>Ship the next release with a calmer, smarter build pipeline.</h3>
+
+            <p>We reduced review bottlenecks, clarified branch ownership, and aligned design feedback with sprint health across the stack.</p>
+
+            <a href="#">Read strategy</a>
+
+        </article>
+
+        <article class="content-card content-card--sprint">
+
+            <p class="eyebrow">Sprint</p>
+
+            <h3>42 tasks</h3>
+
+            <p>12 shipped this week, 6 assigned to engineering, and 3 waiting on QA.</p>
+
+        </article>
+
+        <article class="content-card content-card--deployments">
+
+            <p class="eyebrow">Deployments</p>
+
+            <h3>3 live</h3>
+
+            <p>Production health remains stable while the design QA review stays ahead of the next milestone.</p>
+
+        </article>
+
+        <article class="content-card content-card--team">
+
+            <p class="eyebrow">Team sync</p>
+
+            <h3>Wednesday standup</h3>
+
+            <p>Focus follows the onboarding handoff, campaign rollout, and accessibility fixes.</p>
+
+        </article>
+
+        <article class="content-card content-card--release">
+
+            <p class="eyebrow">Release notes</p>
+
+            <h3>v2.4.1</h3>
+
+            <p>Performance tuning, design token cleanup, and new workspace analytics are now flowing into the release branch.</p>
+
+        </article>
+
+    </section>
+
+</main>
+
+<script>
+    (async () => {
+        const repositoryCount = document.querySelector('[data-repository-count]');
+        const repositoryActivity = document.querySelector('[data-repository-activity]');
+        const pagesStatus = document.querySelector('[data-pages-status]');
+        const pagesUrl = document.querySelector('[data-pages-url]');
+        const pagesNav = document.querySelector('[data-pages-nav]');
+
+        try {
+            const response = await fetch('https://api.github.com/users/michellemercillead-hub/repos?sort=updated&per_page=100');
+            if (!response.ok) throw new Error('GitHub request failed');
+
+            const repositories = await response.json();
+            if (!Array.isArray(repositories)) throw new Error('Unexpected GitHub response');
+
+            repositoryCount.textContent = `${repositories.length} public ${repositories.length === 1 ? 'repository' : 'repositories'} tracked`;
+
+            if (repositories.length === 0) {
+                repositoryActivity.textContent = 'No public repository activity found.';
+                return;
+            }
+
+            repositoryActivity.textContent = `Latest update: ${repositories[0].name}`;
+        } catch (error) {
+            repositoryCount.textContent = 'Repository data unavailable';
+            repositoryActivity.textContent = 'GitHub activity could not be loaded right now.';
+        }
+
+        try {
+            const response = await fetch('../data/github-pages.json');
+            if (!response.ok) throw new Error('Pages data request failed');
+
+            const pages = await response.json();
+            pagesStatus.textContent = pages.status === 'built'
+                ? 'GitHub Pages is live.'
+                : `GitHub Pages status: ${pages.status}.`;
+
+            if (pages.url) {
+                pagesUrl.href = pages.url;
+                pagesUrl.hidden = false;
+                pagesNav.href = pages.url;
+                pagesNav.target = '_blank';
+                pagesNav.rel = 'noopener';
+            }
+        } catch (error) {
+            pagesStatus.textContent = 'GitHub Pages status is unavailable.';
+        }
+    })();
+</script>
+
+<footer>
+
+    <p>
+
+        © 2026 DevForge Developer Workspace
+
+    </p>
+
+</footer>
+
+</body>
+
+</html>
