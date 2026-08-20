@@ -262,7 +262,7 @@
 
                 <button class="secondary-btn" type="button" data-close-issue-modal>Cancel</button>
 
-                <button class="primary-btn" type="button" data-submit-issue>Create Issue</button>
+                <button class="primary-btn" type="submit" data-submit-issue>Create Issue</button>
 
             </div>
 
@@ -339,7 +339,9 @@
         button.addEventListener('click', () => issueModal.close());
     });
 
-    submitIssueButton.addEventListener('click', async () => {
+    issueForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
         if (!issueForm.reportValidity()) return;
 
         const formData = new FormData(issueForm);
@@ -366,7 +368,9 @@
             issueForm.reset();
             setTimeout(() => issueModal.close(), 1200);
         } catch (error) {
-            issueStatus.textContent = 'Could not create the issue. Please try again.';
+            issueStatus.textContent = error instanceof Error
+                ? error.message
+                : 'Could not create the issue. Please try again.';
         } finally {
             submitIssueButton.disabled = false;
         }
