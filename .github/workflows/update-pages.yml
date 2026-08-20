@@ -16,9 +16,6 @@ jobs:
   update-pages:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
       - name: Update GitHub Pages data
         env:
           GH_TOKEN: ${{ github.token }}
@@ -27,6 +24,10 @@ jobs:
           echo "Repository: ${{ github.repository }}"
           echo "Branch: ${{ github.ref_name }}"
           echo "GitHub Pages data update workflow is running."
+          git -c http.extraheader="AUTHORIZATION: bearer ${GH_TOKEN}" \
+            clone --depth 1 --branch "${GITHUB_REF_NAME}" \
+            "https://github.com/${REPOSITORY}.git" repository
+          cd repository
           mkdir -p data
           http_code=$(curl --silent --show-error --location \
             --output /tmp/github-pages.json \
@@ -47,10 +48,8 @@ jobs:
               > data/github-pages.json
           fi
 
-      - name: Commit updated Pages data
-        run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/github-pages.json
           git diff --cached --quiet || git commit -m "Update GitHub Pages data"
-          git push
+          git -c http.extraheader="AUTHORIZATION: bearer ${GH_TOKEN}" push origin HEAD:"${GITHUB_REF_NAME}"
