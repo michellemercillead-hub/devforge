@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>DevForge | Week 04 Responsive Content Grid</title>
+    <title>DevForge | Week 05 Interactive Dashboard Widgets</title>
 
     <!-- Google Fonts -->
 
@@ -96,7 +96,7 @@
 
                     </div>
 
-                    <a class="primary-btn" href="https://github.com/michellemercillead-hub/devforge/issues/new" target="_blank" rel="noopener">New Issue</a>
+                    <button class="primary-btn" type="button" data-open-issue-modal>New Issue</button>
 
                 </header>
 
@@ -210,6 +210,68 @@
 
 </main>
 
+<dialog class="modal-dialog" data-issue-modal>
+
+    <div class="modal-content">
+
+        <header class="modal-header">
+
+            <h3>New Issue</h3>
+
+            <button class="close-btn" type="button" data-close-issue-modal aria-label="Close">&times;</button>
+
+        </header>
+
+        <form class="modal-form" data-issue-form>
+
+            <div class="form-group">
+
+                <label for="issue-title">Title</label>
+
+                <input id="issue-title" name="title" type="text" required placeholder="Short summary of the issue">
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="issue-label">Label</label>
+
+                <select id="issue-label" name="label">
+
+                    <option value="bug">Bug</option>
+
+                    <option value="enhancement">Enhancement</option>
+
+                    <option value="task">Task</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="issue-body">Description</label>
+
+                <textarea id="issue-body" name="body" rows="4" placeholder="What needs to happen?"></textarea>
+
+            </div>
+
+            <p data-issue-status role="status" hidden></p>
+
+            <div class="form-actions">
+
+                <button class="secondary-btn" type="button" data-close-issue-modal>Cancel</button>
+
+                <button class="primary-btn" type="button" data-submit-issue>Create Issue</button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</dialog>
+
 <script>
     (async () => {
         const repositoryCount = document.querySelector('[data-repository-count]');
@@ -258,6 +320,57 @@
             pagesStatus.textContent = 'GitHub Pages status is unavailable.';
         }
     })();
+
+    const issueModal = document.querySelector('[data-issue-modal]');
+    const issueForm = document.querySelector('[data-issue-form]');
+    const issueStatus = document.querySelector('[data-issue-status]');
+    const submitIssueButton = document.querySelector('[data-submit-issue]');
+
+    // Cloudflare Worker that holds the GitHub token server-side.
+    const ISSUE_WORKER_URL = 'https://devforge.michellemercillead.workers.dev';
+
+    document.querySelector('[data-open-issue-modal]').addEventListener('click', () => {
+        issueForm.reset();
+        issueStatus.hidden = true;
+        issueModal.showModal();
+    });
+
+    document.querySelectorAll('[data-close-issue-modal]').forEach((button) => {
+        button.addEventListener('click', () => issueModal.close());
+    });
+
+    submitIssueButton.addEventListener('click', async () => {
+        if (!issueForm.reportValidity()) return;
+
+        const formData = new FormData(issueForm);
+
+        submitIssueButton.disabled = true;
+        issueStatus.hidden = false;
+        issueStatus.textContent = 'Creating issue...';
+
+        try {
+            const response = await fetch(ISSUE_WORKER_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    title: formData.get('title'),
+                    body: formData.get('body'),
+                    label: formData.get('label')
+                })
+            });
+
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Request failed');
+
+            issueStatus.textContent = `Issue #${data.number} created.`;
+            issueForm.reset();
+            setTimeout(() => issueModal.close(), 1200);
+        } catch (error) {
+            issueStatus.textContent = 'Could not create the issue. Please try again.';
+        } finally {
+            submitIssueButton.disabled = false;
+        }
+    });
 </script>
 
 <footer>

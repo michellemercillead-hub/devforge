@@ -962,7 +962,8 @@
         }
 
         & input,
-        & select {
+        & select,
+        & textarea {
             background: rgba(0, 0, 0, 0.2);
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: var(--space-sm);
@@ -974,6 +975,12 @@
                 outline: 2px solid var(--color-primary);
             }
         }
+    }
+
+    [data-issue-status] {
+        margin: 0;
+        font-size: .85rem;
+        color: var(--color-secondary);
     }
 
 }
