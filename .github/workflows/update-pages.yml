@@ -36,6 +36,7 @@ jobs:
               '{repository: $repository, status: (.status // "unknown"), url: (.html_url // null), cname: (.cname // null), build_type: (.build_type // null), updated_at: (now | strftime("%Y-%m-%dT%H:%M:%SZ"))}' \
               /tmp/github-pages.json > data/github-pages.json
           else
+          
             jq -n --arg repository "${REPOSITORY}" --arg code "${http_code}" \
               '{repository: $repository, status: "unavailable", url: null, cname: null, build_type: null, error: ("GitHub Pages API returned HTTP " + $code)}' \
               > data/github-pages.json
