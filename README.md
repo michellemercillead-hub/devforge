@@ -26,7 +26,7 @@ These design tokens will become the foundation for all future dashboard componen
 
 ---
 
-## Planned Weekly Milestones
+## Weekly Milestones
 
 ### Week 02
 - Design System
@@ -65,7 +65,7 @@ These design tokens will become the foundation for all future dashboard componen
 - Testing
 - Deployment
 
-### Week 05 Interactive Issue Creation
+## Week 05 Interactive Issue Creation
 
 The Week 05 dashboard includes a New Issue modal. Visitors can enter an issue title, choose a label, and add a description without opening GitHub manually.
 
@@ -93,6 +93,10 @@ The Worker validates the following:
 The modal also loads public repository activity from the GitHub API and reads
 deployment information from `data/github-pages.json`.
 
+The issue workflow has been tested through the deployed site. A successful
+submission returns an issue number and creates the issue in the `devforge`
+repository without opening GitHub in a new window.
+
 ## GitHub Pages API Integration
 
 The Week 04 dashboard reads deployment status from `data/github-pages.json`.
@@ -105,6 +109,16 @@ To enable the integration after pushing this project to GitHub:
 1. Enable GitHub Pages for the repository in **Settings > Pages**.
 2. In **Settings > Actions > General**, allow the workflow to read and write repository contents.
 3. Run **Update GitHub Pages data** from the repository's Actions tab, or push to `main` or `master`.
+
+The workflow runs on pushes to `main` and can also be started manually with
+**Actions > Update GitHub Pages data > Run workflow**. It updates
+`data/github-pages.json`, which the dashboard reads to display the deployment
+status and site URL.
+
+This repository restricts GitHub Actions to actions owned by
+`michellemercillead-hub`. The workflow therefore does not use
+`actions/checkout`; it clones and pushes the repository with GitHub's built-in
+Actions token instead.
 
 ## Cloudflare Worker Configuration
 
@@ -208,7 +222,7 @@ my-capstone-project/
 ├── week08/
     ├── index.html
     └── styles.css
-
+│
 ├── data/
 │   └── github-pages.json
 │
