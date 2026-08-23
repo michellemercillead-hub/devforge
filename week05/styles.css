@@ -698,7 +698,7 @@
         border: 1px solid color-mix(in srgb, var(--color-primary) 14%, transparent);
         box-shadow: 0 0 30px rgba(108, 92, 255, 0.1);
 
-        &--highlight {
+        &.workspace-card--highlight {
             background: linear-gradient(180deg,
                     color-mix(in srgb, var(--color-primary) 22%, var(--color-surface)),
                     color-mix(in srgb, var(--color-secondary) 16%, var(--color-surface)));
@@ -901,17 +901,17 @@
         text-transform: uppercase;
         letter-spacing: .08em;
 
-        &--live {
+        &.deployment-status--live {
             background: color-mix(in srgb, #22c55e 18%, transparent);
             color: #86efac;
         }
 
-        &--building {
+        &.deployment-status--building {
             background: color-mix(in srgb, #f59e0b 18%, transparent);
             color: #fcd34d;
         }
 
-        &--failed {
+        &.deployment-status--failed {
             background: color-mix(in srgb, #ef4444 18%, transparent);
             color: #fca5a5;
         }
