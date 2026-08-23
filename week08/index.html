@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DevForge | Week 08 Productivity Kit</title>
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+<header>
+
+    <h1><a href="../index.html">DevForge</a></h1>
+
+    <div class="header-tools">
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light mode" aria-pressed="false">
+            <span class="theme-toggle-track" aria-hidden="true">
+                <span class="theme-toggle-icon theme-toggle-icon--sun">☀</span>
+                <span class="theme-toggle-icon theme-toggle-icon--moon">☾</span>
+                <span class="theme-toggle-thumb"></span>
+            </span>
+            <span class="theme-toggle-label" data-theme-label>Dark mode</span>
+        </button>
+        <span class="week-badge">week 08</span>
+    </div>
+
+</header>
+
+<main>
+
+    <!-- ===================== -->
+    <!-- DASHBOARD LAYOUT -->
+    <!-- ===================== -->
+
+    <section id="dashboard-section">
+
+        <h2>Asymmetric Content Hub</h2>
+
+        <p>
+
+            A responsive editorial grid gives the release story priority while
+            keeping sprint, deployment, team, and release updates in view.
+
+        </p>
+
+        <section class="dashboard-shell" role="application" aria-label="Developer workspace dashboard">
+
+            <header class="dashboard-shell-header">
+
+                <a class="dashboard-shell-home" href="../index.html">← Home</a>
+
+                <h2>DevForge Workspace</h2>
+
+            </header>
+
+            <aside class="dashboard-sidebar" aria-label="Primary navigation">
+
+                <div class="sidebar-brand">
+
+                    <p class="eyebrow">Workspace</p>
+
+                    <h3>DevForge</h3>
+
+                </div>
+
+                <nav class="dashboard-nav" aria-label="Dashboard navigation">
+
+                    <a class="nav-link active" href="#">Overview</a>
+
+                    <a class="nav-link" href="../projects/index.html">Projects</a>
+
+                    <a class="nav-link" href="https://github.com/users/michellemercillead-hub/projects/5/views/1" target="_blank" rel="noopener">Kanban Board</a>
+
+                    <a class="nav-link" data-pages-nav href="#deployment-status">Deployments</a>
+
+                    <a class="nav-link" href="#">Settings</a>
+
+                </nav>
+
+            </aside>
+
+            <section class="dashboard-main-area">
+
+                <header class="dashboard-topbar">
+
+                    <div>
+
+                        <p class="eyebrow">Today</p>
+
+                        <h3>Build sprint dashboard</h3>
+
+                    </div>
+
+                    <button class="primary-btn" type="button" data-open-issue-modal>New Issue</button>
+
+                </header>
+
+                <section class="dashboard-workspace" aria-label="Workspace panels">
+
+                    <div class="card-slot card-slot--focus">
+
+                        <article class="workspace-card workspace-card--highlight">
+
+                            <h3>Current Focus</h3>
+
+                            <p>Ship the dashboard prototype and refine the QA checklist.</p>
+
+                        </article>
+
+                    </div>
+
+                    <div class="card-slot card-slot--velocity">
+
+                        <article class="workspace-card">
+
+                            <h3>Velocity</h3>
+
+                            <p data-repository-count>Loading public repositories...</p>
+
+                        </article>
+
+                    </div>
+
+                    <div class="card-slot card-slot--activity">
+
+                        <article class="workspace-card">
+
+                            <h3>Activity Feed</h3>
+
+                            <p data-repository-activity>Checking GitHub activity...</p>
+
+                        </article>
+
+                    </div>
+
+                    <div class="card-slot card-slot--timeline">
+
+                        <article class="workspace-card workspace-card--wide">
+
+                            <h3>Delivery Timeline</h3>
+
+                            <p>Weekly milestones, branch health, and release readiness.</p>
+
+                        </article>
+
+                    </div>
+
+                </section>
+
+            </section>
+
+            <aside class="dashboard-drawer" id="deployment-status" aria-label="Deployment status">
+
+                <article class="sidebar-card">
+
+                    <h3>Deployments</h3>
+
+                    <p data-pages-status>Loading GitHub Pages status...</p>
+
+                    <a data-pages-url href="#" target="_blank" rel="noopener" hidden>Open deployed site</a>
+
+                </article>
+
+            </aside>
+
+        </section>
+
+    </section>
+
+    <section class="productivity-kit" aria-labelledby="productivity-heading">
+
+        <p class="eyebrow">Personal workflow</p>
+
+        <h2 id="productivity-heading">Productivity kit</h2>
+
+        <div class="productivity-grid">
+
+            <article class="productivity-card pomodoro-card" aria-labelledby="pomodoro-heading">
+
+                <div class="productivity-card-header">
+                    <div>
+                        <p class="eyebrow">Focus sprint</p>
+                        <h3 id="pomodoro-heading">Pomodoro timer</h3>
+                    </div>
+                    <span class="timer-mode" data-timer-mode>Focus</span>
+                </div>
+
+                <output class="timer-display" data-timer-display aria-live="polite">25:00</output>
+
+                <div class="timer-progress" aria-hidden="true"><span data-timer-progress></span></div>
+
+                <div class="productivity-actions">
+                    <button class="primary-btn" type="button" data-timer-start>Start</button>
+                    <button class="secondary-btn" type="button" data-timer-reset>Reset</button>
+                </div>
+
+            </article>
+
+            <article class="productivity-card calendar-card" aria-labelledby="calendar-heading">
+
+                <div class="productivity-card-header">
+                    <div>
+                        <p class="eyebrow">Schedule</p>
+                        <h3 id="calendar-heading">Google Calendar</h3>
+                    </div>
+                    <a class="text-link" href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener">Open Calendar</a>
+                </div>
+
+                <iframe
+                    class="calendar-frame"
+                    src="https://calendar.google.com/calendar/embed?src=en.usa%23holiday%40group.v.calendar.google.com&ctz=America%2FNew_York"
+                    title="Google Calendar"
+                    loading="lazy"></iframe>
+
+            </article>
+
+            <article class="productivity-card notes-card" aria-labelledby="notes-heading">
+
+                <div class="productivity-card-header">
+                    <div>
+                        <p class="eyebrow">Quick capture</p>
+                        <h3 id="notes-heading">Sticky notes</h3>
+                    </div>
+                    <button class="primary-btn" type="button" data-add-note>New note</button>
+                </div>
+
+                <form class="note-form" data-note-form hidden>
+                    <label for="note-title">Title</label>
+                    <input id="note-title" name="title" type="text" maxlength="80" placeholder="Note title" required>
+                    <label for="note-body">Note</label>
+                    <textarea id="note-body" name="body" rows="3" maxlength="500" placeholder="Capture an idea..." required></textarea>
+                    <div class="productivity-actions">
+                        <button class="primary-btn" type="submit">Save note</button>
+                        <button class="secondary-btn" type="button" data-cancel-note>Cancel</button>
+                    </div>
+                </form>
+
+                <div class="notes-list" data-notes-list aria-live="polite"></div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+</main>
+
+<dialog class="modal-dialog" data-issue-modal>
+
+    <div class="modal-content">
+
+        <header class="modal-header">
+
+            <h3>New Issue</h3>
+
+            <button class="close-btn" type="button" data-close-issue-modal aria-label="Close">&times;</button>
+
+        </header>
+
+        <form class="modal-form" data-issue-form>
+
+            <div class="form-group">
+
+                <label for="issue-title">Title</label>
+
+                <input id="issue-title" name="title" type="text" required placeholder="Short summary of the issue">
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="issue-label">Label</label>
+
+                <select id="issue-label" name="label">
+
+                    <option value="bug">Bug</option>
+
+                    <option value="enhancement">Enhancement</option>
+
+                    <option value="task">Task</option>
+
+                </select>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="issue-body">Description</label>
+
+                <textarea id="issue-body" name="body" rows="4" placeholder="What needs to happen?"></textarea>
+
+            </div>
+
+            <p data-issue-status role="status" hidden></p>
+
+            <div class="form-actions">
+
+                <button class="secondary-btn" type="button" data-close-issue-modal>Cancel</button>
+
+                <button class="primary-btn" type="submit" data-submit-issue>Create Issue</button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</dialog>
+
+<script src="app.js"></script>
+
+<script>
+    (async () => {
+        const repositoryCount = document.querySelector('[data-repository-count]');
+        const repositoryActivity = document.querySelector('[data-repository-activity]');
+        const pagesStatus = document.querySelector('[data-pages-status]');
+        const pagesUrl = document.querySelector('[data-pages-url]');
+        const pagesNav = document.querySelector('[data-pages-nav]');
+
+        try {
+            const response = await fetch('https://api.github.com/users/michellemercillead-hub/repos?sort=updated&per_page=100');
+            if (!response.ok) throw new Error('GitHub request failed');
+
+            const repositories = await response.json();
+            if (!Array.isArray(repositories)) throw new Error('Unexpected GitHub response');
+
+            repositoryCount.textContent = `${repositories.length} public ${repositories.length === 1 ? 'repository' : 'repositories'} tracked`;
+
+            if (repositories.length === 0) {
+                repositoryActivity.textContent = 'No public repository activity found.';
+                return;
+            }
+
+            repositoryActivity.textContent = `Latest update: ${repositories[0].name}`;
+        } catch (error) {
+            repositoryCount.textContent = 'Repository data unavailable';
+            repositoryActivity.textContent = 'GitHub activity could not be loaded right now.';
+        }
+
+        try {
+            const response = await fetch('../data/github-pages.json');
+            if (!response.ok) throw new Error('Pages data request failed');
+
+            const pages = await response.json();
+            pagesStatus.textContent = pages.status === 'built'
+                ? 'GitHub Pages is live.'
+                : `GitHub Pages status: ${pages.status}.`;
+
+            if (pages.url) {
+                pagesUrl.href = pages.url;
+                pagesUrl.hidden = false;
+                pagesNav.href = pages.url;
+                pagesNav.target = '_blank';
+                pagesNav.rel = 'noopener';
+            }
+        } catch (error) {
+            pagesStatus.textContent = 'GitHub Pages status is unavailable.';
+        }
+    })();
+
+    const issueModal = document.querySelector('[data-issue-modal]');
+    const issueForm = document.querySelector('[data-issue-form]');
+    const issueStatus = document.querySelector('[data-issue-status]');
+    const submitIssueButton = document.querySelector('[data-submit-issue]');
+
+    // Cloudflare Worker that holds the GitHub token server-side.
+    const ISSUE_WORKER_URL = 'https://devforge.michellemercillead.workers.dev';
+
+    document.querySelector('[data-open-issue-modal]').addEventListener('click', () => {
+        issueForm.reset();
+        issueStatus.hidden = true;
+        issueModal.showModal();
+    });
+
+    document.querySelectorAll('[data-close-issue-modal]').forEach((button) => {
+        button.addEventListener('click', () => issueModal.close());
+    });
+
+    issueForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        if (!issueForm.reportValidity()) return;
+
+        const formData = new FormData(issueForm);
+
+        submitIssueButton.disabled = true;
+        issueStatus.hidden = false;
+        issueStatus.textContent = 'Creating issue...';
+
+        try {
+            const response = await fetch(ISSUE_WORKER_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    title: formData.get('title'),
+                    body: formData.get('body'),
+                    label: formData.get('label')
+                })
+            });
+
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error || 'Request failed');
+
+            issueStatus.textContent = `Issue #${data.number} created.`;
+            issueForm.reset();
+            setTimeout(() => issueModal.close(), 1200);
+        } catch (error) {
+            issueStatus.textContent = error instanceof Error
+                ? error.message
+                : 'Could not create the issue. Please try again.';
+        } finally {
+            submitIssueButton.disabled = false;
+        }
+    });
+</script>
+
+<footer>
+
+    <p>
+
+        © 2026 DevForge Developer Workspace
+
+    </p>
+
+</footer>
+
+<div class="scroll-progress-bar" aria-hidden="true"></div>
+
+</body>
+
+</html>

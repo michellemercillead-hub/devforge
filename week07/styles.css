@@ -1,0 +1,1209 @@
+/* ===========================================
+   DEVFORGE DESIGN SYSTEM
+    Week 06 Capstone: Container Queries
+
+   Cascade layers (lowest to highest priority):
+   reset -> base -> layout -> components
+   Unlayered rules (none here) would always win over all of these.
+=========================================== */
+
+@layer reset, base, layout, components;
+
+/* ===========================================
+   RESET
+   Neutralizes browser defaults. No visual
+   opinions, no colors, no branding.
+=========================================== */
+
+@layer reset {
+
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body,
+    h1,
+    h2,
+    h3,
+    p,
+    ul {
+        margin: 0;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+    }
+
+    button {
+        font: inherit;
+        cursor: pointer;
+    }
+
+}
+
+/* ===========================================
+   BASE
+   Design tokens (custom properties) plus the
+   default look of bare HTML elements: colors,
+   type scale, and generic link/heading rules
+   that apply everywhere, before any component
+   or layout decisions are made.
+=========================================== */
+
+@layer base {
+
+    :root {
+
+        /* ---------- Colors ---------- */
+        --color-primary: oklch(72% 0.32 320);
+        --color-secondary: oklch(80% 0.25 210);
+        --color-background: oklch(12% 0.14 260);
+        --color-surface: oklch(25% 0.12 280);
+        --color-text: oklch(96% 0.05 260);
+
+        /* ---------- Typography ---------- */
+        --size-base: 1rem;
+        --size-heading-md: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+        --size-heading-lg: clamp(1.75rem, 1.31rem + 1.88vw, 3rem);
+
+        /* ---------- Spacing ---------- */
+        --space-xs: .25rem;
+        --space-sm: .5rem;
+        --space-md: 1rem;
+        --space-lg: 2rem;
+        --space-xl: 4rem;
+
+        /* ---------- Radius & Shadow ---------- */
+        --radius: .75rem;
+        --shadow: 0 10px 25px rgba(0, 0, 0, .08);
+
+    }
+
+    /* ---------- Dark Mode Remap ---------- */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --color-background: oklch(10% 0.05 260);
+            --color-surface: oklch(18% 0.08 260);
+            --color-text: oklch(98% 0.01 260);
+            --color-primary: oklch(75% 0.25 320);
+        }
+    }
+
+    body {
+        background-color: var(--color-background);
+        color: var(--color-text);
+        font-family: 'Inter', sans-serif;
+        padding: var(--space-md);
+        line-height: 1.5;
+    }
+
+    h1,
+    h2,
+    h3 {
+        font-family: 'Space Grotesk', sans-serif;
+        font-weight: 700;
+    }
+
+    h1 {
+        font-size: var(--size-heading-lg);
+        margin-bottom: var(--space-md);
+    }
+
+    h2 {
+        font-size: var(--size-heading-md);
+        margin-bottom: var(--space-md);
+    }
+
+    h3 {
+        margin-bottom: var(--space-sm);
+    }
+
+    p {
+        margin-bottom: var(--space-md);
+        max-width: 70ch;
+    }
+
+    ul {
+        padding-left: 1.5rem;
+    }
+
+    li {
+        margin-bottom: .5rem;
+    }
+
+    a {
+        color: var(--color-secondary);
+        text-decoration: none;
+    }
+
+    a:focus-visible {
+        outline: 3px solid var(--color-primary);
+        outline-offset: 3px;
+    }
+
+    section {
+        background: var(--color-surface);
+        border-radius: var(--radius);
+        padding: var(--space-lg);
+        margin-bottom: var(--space-xl);
+        box-shadow: var(--shadow);
+    }
+
+    header h1 {
+        font-size: var(--size-heading-lg);
+        margin-bottom: var(--space-sm);
+    }
+
+    header p {
+        font-size: 1.1rem;
+    }
+
+    header a {
+        color: var(--color-primary);
+        text-decoration: none;
+    }
+
+    header a:hover {
+        text-decoration: underline;
+    }
+
+}
+
+/* ===========================================
+   LAYOUT
+   Structural rules: grid/flex containers, region
+   placement, and the responsive breakpoints that
+   reshape those containers. No colors or borders
+   beyond what's needed to read the structure.
+=========================================== */
+
+@layer layout {
+
+    .dashboard-shell {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(220px, 260px) minmax(0, 1fr) minmax(180px, 240px);
+        min-height: 100dvh;
+        padding: var(--space-md);
+        gap: var(--space-md);
+        border-radius: var(--radius);
+    }
+
+    .dashboard-shell-header {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--space-md) var(--space-lg);
+        border-radius: calc(var(--radius) + 2px);
+    }
+
+    .dashboard-sidebar {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-lg);
+        padding: var(--space-lg);
+        border-radius: var(--radius);
+    }
+
+    .dashboard-main-area {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-lg);
+        min-width: 0;
+        container-type: inline-size;
+        container-name: main-column;
+    }
+
+    .sidebar-brand {
+        padding-bottom: var(--space-sm);
+    }
+
+    .dashboard-nav {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-sm);
+    }
+
+    .dashboard-topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: var(--space-lg);
+        border-radius: var(--radius);
+    }
+
+    .dashboard-topbar h3,
+    .dashboard-sidebar h3,
+    .dashboard-drawer h3 {
+        margin-bottom: 0;
+    }
+
+    .dashboard-workspace {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr;
+        grid-template-areas:
+            "focus velocity"
+            "activity timeline";
+        gap: var(--space-md);
+        flex: 1;
+    }
+
+    .card-slot {
+        min-width: 0;
+        container-type: inline-size;
+        container-name: card-slot;
+    }
+
+    .card-slot--focus {
+        grid-area: focus;
+    }
+
+    .card-slot--velocity {
+        grid-area: velocity;
+    }
+
+    .card-slot--activity {
+        grid-area: activity;
+    }
+
+    .card-slot--timeline {
+        grid-area: timeline;
+    }
+
+    .dashboard-drawer {
+        padding: var(--space-lg);
+        border-radius: var(--radius);
+        container-type: inline-size;
+        container-name: sidebar-slot;
+    }
+
+    .content-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.65fr) repeat(2, minmax(0, 1fr));
+        grid-template-areas:
+            "feature sprint deployments"
+            "feature sprint team"
+            "feature release release";
+        grid-auto-flow: dense;
+        gap: var(--space-sm);
+        margin-top: var(--space-xl);
+    }
+
+    .feature-card {
+        grid-area: feature;
+    }
+
+    .content-card--sprint {
+        grid-area: sprint;
+    }
+
+    .content-card--deployments {
+        grid-area: deployments;
+    }
+
+    .content-card--team {
+        grid-area: team;
+    }
+
+    .content-card--release {
+        grid-area: release;
+    }
+
+    /* ---------- Deployment Layout ---------- */
+
+    .deployment-stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: var(--space-md);
+    }
+
+    .deployment-list {
+        display: grid;
+        gap: var(--space-md);
+    }
+
+    .deployment-card {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: var(--space-md);
+        padding: var(--space-lg);
+        border-radius: var(--radius);
+    }
+
+    .deployment-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+        margin-top: var(--space-sm);
+    }
+
+    /* ---------- Modal Layout ---------- */
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--space-lg);
+        padding-bottom: var(--space-sm);
+    }
+
+    .modal-form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--space-sm);
+        margin-top: var(--space-sm);
+    }
+
+    footer {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: var(--space-md);
+        margin-top: var(--space-xl);
+        padding: var(--space-md) 0;
+    }
+
+    /* ---------- Responsive Breakpoints ---------- */
+
+    @media (max-width: 1100px) {
+
+        html,
+        body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: clip;
+        }
+
+        .dashboard-shell {
+            grid-template-columns: minmax(0, 1fr);
+            grid-template-areas:
+                "header"
+                "sidebar"
+                "main"
+                "drawer";
+            min-height: auto;
+        }
+
+        .dashboard-sidebar,
+        .dashboard-main-area,
+        .dashboard-drawer,
+        .content-grid {
+            min-width: 0;
+        }
+
+        .dashboard-nav {
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .nav-link {
+            overflow-wrap: anywhere;
+        }
+
+        .dashboard-workspace,
+        .content-grid {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .content-grid {
+            grid-template-areas: none;
+        }
+
+        .dashboard-workspace {
+            grid-template-areas:
+                "focus"
+                "velocity"
+                "activity"
+                "timeline";
+        }
+
+        .card-slot--timeline,
+        .feature-card,
+        .content-card--sprint,
+        .content-card--deployments,
+        .content-card--team,
+        .content-card--release {
+            grid-column: auto;
+            grid-row: auto;
+            grid-area: auto;
+        }
+
+        .feature-card {
+            min-height: 220px;
+        }
+
+        .dashboard-topbar,
+        .dashboard-shell-header {
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        h1,
+        h2,
+        h3,
+        p,
+        a,
+        button {
+            overflow-wrap: anywhere;
+        }
+
+    }
+
+    @media (max-width: 900px) {
+
+        .content-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-template-areas:
+                "feature feature"
+                "sprint deployments"
+                "team release";
+        }
+
+        .feature-card {
+            min-height: 220px;
+        }
+
+        .dashboard-shell {
+            grid-template-columns: 1fr;
+        }
+
+        .dashboard-topbar {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: var(--space-sm);
+        }
+
+        .dashboard-workspace {
+            grid-template-columns: 1fr;
+            grid-template-areas:
+                "focus"
+                "velocity"
+                "activity"
+                "timeline";
+        }
+
+    }
+
+    @media (max-width: 600px) {
+
+        .content-grid {
+            grid-template-columns: minmax(0, 1fr);
+            grid-template-areas:
+                "feature"
+                "sprint"
+                "deployments"
+                "team"
+                "release";
+        }
+
+    }
+
+}
+
+/* ===========================================
+   COMPONENTS
+   Reusable UI widgets: color, border, shadow,
+   and interactive states. These rules describe
+   what things look like, not where they sit.
+=========================================== */
+
+@layer components {
+
+    /* ---------- Header / Nav ---------- */
+
+    .week-badge {
+        position: absolute;
+        top: var(--space-sm);
+        right: var(--space-sm);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: .35rem .75rem;
+        border-radius: 999px;
+        background: color-mix(in srgb, var(--color-primary) 30%, var(--color-surface));
+        color: white;
+        font-size: .8rem;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+    }
+
+    .home-link {
+        margin: 0;
+        font-size: .95rem;
+
+        & a {
+            display: inline-block;
+            padding: .55rem 1rem;
+            border: 1px solid var(--color-primary);
+            border-radius: 999px;
+            background: var(--color-primary);
+            color: white;
+            box-shadow: 0 0 20px rgba(48, 104, 255, 0.45);
+            transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+
+            /* week04 had two competing hover rules; the second's background won the cascade */
+            &:hover {
+                background: color-mix(in srgb, var(--color-primary) 20%, transparent);
+                color: white;
+                transform: translateY(-1px);
+                box-shadow: 0 0 28px rgba(48, 104, 255, 0.65);
+            }
+        }
+    }
+
+    .footer-link {
+        margin-top: 0;
+    }
+
+    footer {
+        opacity: .95;
+
+        & p:first-child {
+            margin: 0;
+            opacity: .7;
+        }
+    }
+
+    /* ---------- Dashboard Shell Skin ---------- */
+
+    .dashboard-shell {
+        background: radial-gradient(circle at top right,
+                color-mix(in srgb, var(--color-secondary) 18%, black 30%),
+                color-mix(in srgb, var(--color-background) 82%, black));
+        border: 1px solid color-mix(in srgb, var(--color-primary) 40%, transparent);
+        box-shadow: 0 0 80px rgba(100, 75, 255, 0.18);
+    }
+
+    .dashboard-shell-header {
+        background: color-mix(in srgb, var(--color-surface) 92%, black 8%);
+        border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
+        box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.06), 0 10px 24px rgba(0, 0, 0, 0.08);
+
+        & h2 {
+            margin: 0;
+            font-size: 1rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            opacity: .85;
+        }
+    }
+
+    .dashboard-shell-home {
+        color: var(--color-primary);
+        font-weight: 700;
+        text-decoration: none;
+
+        &:hover {
+            color: white;
+        }
+    }
+
+    .dashboard-sidebar {
+        background: color-mix(in srgb, var(--color-surface) 70%, black 30%);
+        border: 1px solid color-mix(in srgb, var(--color-primary) 30%, transparent);
+        box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.18);
+    }
+
+    .sidebar-brand {
+        border-bottom: 1px solid color-mix(in srgb, var(--color-text) 12%, transparent);
+    }
+
+    .eyebrow {
+        margin-bottom: var(--space-xs);
+        font-size: .8rem;
+        font-weight: 700;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        opacity: .7;
+    }
+
+    .nav-link {
+        color: var(--color-text);
+        text-decoration: none;
+        padding: .65rem .85rem;
+        border-radius: 999px;
+
+        &.active,
+        &:hover {
+            background: linear-gradient(135deg,
+                    color-mix(in srgb, var(--color-primary) 28%, transparent),
+                    color-mix(in srgb, var(--color-secondary) 28%, transparent));
+            color: white;
+        }
+    }
+
+    .dashboard-topbar {
+        background: color-mix(in srgb, var(--color-surface) 82%, black 18%);
+        border: 1px solid color-mix(in srgb, var(--color-secondary) 30%, transparent);
+        box-shadow: 0 10px 30px rgba(88, 68, 255, 0.12);
+
+        /* Topbar's own instance of the button needs no bottom margin */
+        & .primary-btn {
+            margin-bottom: 0;
+        }
+    }
+
+    .dashboard-drawer {
+        background: color-mix(in srgb, var(--color-surface) 80%, black 20%);
+        border: 1px solid color-mix(in srgb, var(--color-secondary) 24%, transparent);
+    }
+
+    /* ---------- Buttons ---------- */
+
+    .primary-btn {
+        display: inline-block;
+        background: var(--color-primary);
+        color: white;
+        text-decoration: none;
+        border: none;
+        border-radius: var(--radius);
+        padding: .85rem 1.5rem;
+        margin-bottom: var(--space-lg);
+        transition: .3s;
+
+        &:hover {
+            opacity: .85;
+        }
+    }
+
+    .secondary-btn {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: var(--color-text);
+        padding: var(--space-sm) var(--space-md);
+        border-radius: var(--radius);
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        color: var(--color-secondary);
+        font-size: 1.5rem;
+        line-height: 1;
+    }
+
+    /* ---------- Cards ---------- */
+
+    .workspace-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(var(--space-md), calc(var(--space-md) + 0.8cqw), var(--space-lg));
+        gap: clamp(var(--space-sm), 1cqw, var(--space-md));
+        min-height: 180px;
+        background: color-mix(in srgb, var(--color-surface) 90%, black 10%);
+        border-radius: var(--radius);
+        border: 1px solid color-mix(in srgb, var(--color-primary) 14%, transparent);
+        box-shadow: 0 0 30px rgba(108, 92, 255, 0.1);
+
+        &.workspace-card--highlight {
+            background: linear-gradient(180deg,
+                    color-mix(in srgb, var(--color-primary) 22%, var(--color-surface)),
+                    color-mix(in srgb, var(--color-secondary) 16%, var(--color-surface)));
+            color: white;
+        }
+    }
+
+    .sidebar-card {
+        display: grid;
+        gap: clamp(var(--space-sm), 1cqw, var(--space-md));
+        padding: clamp(var(--space-sm), 1cqw, var(--space-md));
+    }
+
+    .sidebar-card h3,
+    .sidebar-card p {
+        margin: 0;
+    }
+
+    .sidebar-card a {
+        width: fit-content;
+        color: var(--color-secondary);
+    }
+
+    .sidebar-card p {
+        font-size: clamp(.82rem, calc(.78rem + 0.25cqw), .95rem);
+    }
+
+    @container card-slot (min-width: 451px) {
+
+        .card-slot .workspace-card {
+            display: grid;
+            grid-template-columns: minmax(10rem, 1fr) minmax(0, 1fr);
+            align-items: center;
+            gap: var(--space-sm) var(--space-md);
+        }
+
+        .card-slot .workspace-card h3,
+        .card-slot .workspace-card p {
+            margin: 0;
+        }
+
+    }
+
+    @container sidebar-slot (min-width: 451px) {
+
+        .sidebar-card {
+            grid-template-columns: 1fr auto;
+            align-items: center;
+        }
+
+        .sidebar-card h3 {
+            grid-column: 1 / -1;
+        }
+
+        .sidebar-card p {
+            margin: 0;
+        }
+
+    }
+
+    .content-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 220px;
+        padding: var(--space-lg);
+        background: color-mix(in srgb, var(--color-surface) 88%, black 12%);
+        border: 1px solid color-mix(in srgb, var(--color-primary) 24%, transparent);
+        border-radius: var(--radius);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+
+        & h3 {
+            margin-bottom: var(--space-sm);
+        }
+
+        & p {
+            margin-bottom: 0;
+        }
+
+        & a {
+            margin-top: var(--space-md);
+            color: var(--color-primary);
+            font-weight: 700;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        /* .feature-card is a .content-card, so its overrides nest here */
+        &.feature-card {
+            background: linear-gradient(135deg,
+                    color-mix(in srgb, var(--color-primary) 28%, var(--color-surface)),
+                    color-mix(in srgb, var(--color-secondary) 18%, var(--color-surface)));
+            color: white;
+            min-height: 220px;
+
+            & .eyebrow {
+                opacity: 1;
+                color: white;
+            }
+
+            & a {
+                color: white;
+            }
+        }
+    }
+
+    .dashboard-card {
+        background: var(--color-background);
+        border-radius: var(--radius);
+        padding: var(--space-lg);
+        border-left: 6px solid var(--color-primary);
+    }
+
+    /* ---------- Color Palette (design tokens showcase) ---------- */
+
+    .color-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: var(--space-lg);
+        margin-top: var(--space-lg);
+    }
+
+    .color-card {
+        border-radius: var(--radius);
+        padding: var(--space-lg);
+        text-align: center;
+        color: white;
+        min-height: 150px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        /* Swatch variants are combined on the same element, e.g. class="color-card primary" */
+        &.primary {
+            background: var(--color-primary);
+        }
+
+        &.secondary {
+            background: var(--color-secondary);
+        }
+
+        &.background {
+            background: var(--color-background);
+            color: var(--color-text);
+            border: 2px solid #ccc;
+        }
+
+        &.surface {
+            background: var(--color-surface);
+            color: var(--color-text);
+            border: 2px solid #ccc;
+        }
+
+        &.text {
+            background: var(--color-text);
+        }
+    }
+
+    /* ---------- Typography Utilities ---------- */
+
+    .display-heading {
+        font-size: var(--size-heading-lg);
+    }
+
+    .medium-heading {
+        font-size: var(--size-heading-md);
+    }
+
+    /* ---------- Spacing Utilities ---------- */
+
+    .spacing-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-md);
+        margin-top: var(--space-lg);
+    }
+
+    .spacing-box {
+        background: var(--color-primary);
+        color: white;
+        border-radius: var(--radius);
+        font-weight: bold;
+
+        /* Size variants are combined on the same element, e.g. class="spacing-box md" */
+        &.xs {
+            padding: var(--space-xs);
+        }
+
+        &.sm {
+            padding: var(--space-sm);
+        }
+
+        &.md {
+            padding: var(--space-md);
+        }
+
+        &.lg {
+            padding: var(--space-lg);
+        }
+
+        &.xl {
+            padding: var(--space-xl);
+        }
+    }
+
+    /* ---------- Deployment Widgets ---------- */
+
+    .deployment-stat {
+        padding: var(--space-md);
+        background: color-mix(in srgb, var(--color-surface) 88%, black 12%);
+        border: 1px solid color-mix(in srgb, var(--color-primary) 20%, transparent);
+        border-radius: var(--radius);
+
+        & strong {
+            display: block;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 1.75rem;
+        }
+
+        & span {
+            font-size: .85rem;
+            opacity: .7;
+        }
+    }
+
+    .deployment-card {
+        background: color-mix(in srgb, var(--color-surface) 90%, black 10%);
+        border: 1px solid color-mix(in srgb, var(--color-primary) 18%, transparent);
+        box-shadow: 0 0 30px rgba(108, 92, 255, 0.08);
+
+        & h3 {
+            margin-bottom: var(--space-xs);
+        }
+    }
+
+    .deployment-meta {
+        font-size: .85rem;
+        opacity: .75;
+    }
+
+    .deployment-status {
+        display: inline-flex;
+        align-items: center;
+        gap: .4rem;
+        width: fit-content;
+        padding: .3rem .65rem;
+        border-radius: 999px;
+        font-size: .75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .08em;
+
+        &.deployment-status--live {
+            background: color-mix(in srgb, #22c55e 18%, transparent);
+            color: #86efac;
+        }
+
+        &.deployment-status--building {
+            background: color-mix(in srgb, #f59e0b 18%, transparent);
+            color: #fcd34d;
+        }
+
+        &.deployment-status--failed {
+            background: color-mix(in srgb, #ef4444 18%, transparent);
+            color: #fca5a5;
+        }
+    }
+
+    .deployment-actions {
+        display: flex;
+        align-items: center;
+        gap: var(--space-sm);
+
+        & a {
+            padding: .55rem .85rem;
+            border: 1px solid color-mix(in srgb, var(--color-primary) 35%, transparent);
+            border-radius: .5rem;
+            color: var(--color-text);
+            text-decoration: none;
+
+            &:hover {
+                background: color-mix(in srgb, var(--color-primary) 18%, transparent);
+                color: white;
+            }
+        }
+    }
+
+    /* ---------- Container Query Card ---------- */
+
+    .card-demo {
+        container-type: inline-size;
+    }
+
+    .card-list {
+        container-type: inline-size;
+        container-name: project-card;
+        max-width: 760px;
+
+        @container project-card (min-width: 451px) {
+
+            .card {
+                display: grid;
+                grid-template-columns: minmax(180px, 35%) 1fr;
+                align-items: center;
+            }
+
+            .card__image {
+                height: 100%;
+                min-height: 180px;
+            }
+
+        }
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-md);
+        padding: var(--space-md);
+        border: 1px solid color-mix(in srgb, var(--color-secondary) 25%, transparent);
+        border-radius: var(--radius);
+        background: color-mix(in srgb, var(--color-background) 45%, var(--color-surface));
+    }
+
+    .card__image {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        border-radius: calc(var(--radius) - 2px);
+    }
+
+    .card__content {
+        display: grid;
+        gap: var(--space-sm);
+    }
+
+    .card__eyebrow,
+    .card__title,
+    .card__text {
+        margin: 0;
+    }
+
+    .card__eyebrow {
+        color: var(--color-secondary);
+        font-size: .8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .card__link {
+        width: fit-content;
+        color: var(--color-secondary);
+    }
+
+    /* ---------- Modal ---------- */
+
+    .modal-dialog {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: var(--radius);
+        background-color: var(--color-surface);
+        color: var(--color-text);
+        padding: 0;
+        max-width: 450px;
+        width: 90%;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+
+        &::backdrop {
+            background: rgba(10, 10, 12, 0.75);
+            backdrop-filter: blur(4px);
+        }
+    }
+
+    .modal-content {
+        padding: var(--space-lg);
+    }
+
+    .modal-header {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* ---------- Form Controls ---------- */
+
+    .form-group {
+
+        & label {
+            font-size: 0.85rem;
+            color: var(--color-secondary);
+        }
+
+        & input,
+        & select,
+        & textarea {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: var(--space-sm);
+            border-radius: var(--radius);
+            color: var(--color-text);
+            font-family: inherit;
+
+            &:focus {
+                outline: 2px solid var(--color-primary);
+            }
+        }
+    }
+
+    [data-issue-status] {
+        margin: 0;
+        font-size: .85rem;
+        color: var(--color-secondary);
+    }
+
+    /* ---------- Week 07 Motion ---------- */
+
+    :where(a, button, input, select, textarea, .content-card, .workspace-card, .sidebar-card, .card) {
+        transition: transform .2s ease, opacity .2s ease, box-shadow .2s ease, background-color .2s ease, border-color .2s ease;
+    }
+
+    :where(a, button, input, select, textarea):focus-visible {
+        outline: 3px solid var(--color-primary);
+        outline-offset: 3px;
+    }
+
+    :where(.content-card, .workspace-card, .sidebar-card, .card):hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 30px rgba(0, 0, 0, .2);
+    }
+
+    .scroll-progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        width: 100%;
+        height: 4px;
+        background: var(--color-primary);
+        transform: scaleX(0);
+        transform-origin: 0 50%;
+        animation: scale-progress auto linear;
+        animation-timeline: scroll(root);
+    }
+
+    @keyframes scale-progress {
+        from {
+            transform: scaleX(0);
+        }
+
+        to {
+            transform: scaleX(1);
+        }
+    }
+
+    @supports (animation-timeline: view()) {
+        :where(.content-card, .workspace-card, .sidebar-card, .card) {
+            animation: card-reveal linear both;
+            animation-timeline: view();
+            animation-range: entry 0% cover 35%;
+        }
+    }
+
+    @keyframes card-reveal {
+        from {
+            opacity: 0;
+            transform: translateY(20px) scale(.98);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-delay: -1ms !important;
+            animation-duration: 1ms !important;
+            animation-iteration-count: 1 !important;
+            background-attachment: initial !important;
+            scroll-behavior: auto !important;
+            transition-duration: 0s !important;
+            transition-delay: 0s !important;
+        }
+    }
+
+}
