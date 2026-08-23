@@ -260,6 +260,7 @@
     .card-slot {
         min-width: 0;
         container-type: inline-size;
+        container-name: card-slot;
     }
 
     .card-slot--focus {
@@ -716,7 +717,7 @@
         border: 1px solid color-mix(in srgb, var(--color-primary) 14%, transparent);
         box-shadow: 0 0 30px rgba(108, 92, 255, 0.1);
 
-        &--highlight {
+        &.workspace-card--highlight {
             background: linear-gradient(180deg,
                     color-mix(in srgb, var(--color-primary) 22%, var(--color-surface)),
                     color-mix(in srgb, var(--color-secondary) 16%, var(--color-surface)));
@@ -744,17 +745,17 @@
         font-size: clamp(.82rem, calc(.78rem + 0.25cqw), .95rem);
     }
 
-    @container main-column (min-width: 451px) {
+    @container card-slot (min-width: 451px) {
 
-        .dashboard-main-area .workspace-card {
+        .card-slot .workspace-card {
             display: grid;
             grid-template-columns: minmax(10rem, 1fr) minmax(0, 1fr);
             align-items: center;
             gap: var(--space-sm) var(--space-md);
         }
 
-        .dashboard-main-area .workspace-card h3,
-        .dashboard-main-area .workspace-card p {
+        .card-slot .workspace-card h3,
+        .card-slot .workspace-card p {
             margin: 0;
         }
 
@@ -972,17 +973,17 @@
         text-transform: uppercase;
         letter-spacing: .08em;
 
-        &--live {
+        &.deployment-status--live {
             background: color-mix(in srgb, #22c55e 18%, transparent);
             color: #86efac;
         }
 
-        &--building {
+        &.deployment-status--building {
             background: color-mix(in srgb, #f59e0b 18%, transparent);
             color: #fcd34d;
         }
 
-        &--failed {
+        &.deployment-status--failed {
             background: color-mix(in srgb, #ef4444 18%, transparent);
             color: #fca5a5;
         }
