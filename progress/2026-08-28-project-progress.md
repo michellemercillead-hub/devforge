@@ -71,6 +71,6 @@ Most importantly, this project has helped me understand that professional develo
 ## Project
 
 **Project:** DevForge Developer Workspace
-**Repository:** [Add your GitHub repository link here]
+**Repository:** https://github.com/michellemercillead-hub/devforge
 **Current focus:** Building a scalable developer dashboard and workspace
 
